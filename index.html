@@ -5,6 +5,7 @@
   function runCode(){
     let interpret = eval(document.getElementById('interpreter').value);
     let codes = document.getElementById('interpreter').value.split('\n');
+    document.getelementById('output').value = '';
     codes.forEach((code)=>{
        findUnique(code);
        interpret(code);
@@ -67,7 +68,7 @@ function interpret(p){
 <<|.>.>.+||:||:+:<:|>.<|.|+>>||+<:|...|+:|+|>.<<|||:<+<<:||>...|:>+<<>|>:+<<|:<+<<:>|.>:>:.||>+>:>.||>+>.:|:<>:
 </textarea>
 <br>
-<button>Decode</button>
+<button onclick="runCode();">Decode</button>
 
 <hr>
 
