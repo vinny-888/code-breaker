@@ -7,8 +7,10 @@
     let codes = document.getElementById('inputs').value.split('\n');
     document.getElementById('output').value = '';
     codes.forEach((code)=>{
-       findUnique(code);
-       interpret(code);
+      findUnique(code);
+      let output = interpret(code);
+      console.log(output);
+      document.getElementById('output').value += output + '\n';
     });
   }
   function findUnique(str){
@@ -50,8 +52,7 @@ function interpret(p){
             case '#': o += '\n'; break;
         }
     }
-    console.log(o);
-    document.getelementById('output').value += o + '\n';
+    return o;
 }
 </textarea>
 
