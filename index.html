@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+  function runCode(){
+    let interpret = eval(document.getElementById('interpreter').value);
+    let codes = document.getElementById('interpreter').value.split('\n');
+    codes.forEach((code)=>{
+       findUnique(code);
+       interpret(code);
+    )
+  }
+  function findUnique(str){
+    // The variable that contains the unique values
+    let uniq = "";
+
+    for(let i = 0; i < str.length; i++){
+      // Checking if the uniq contains the character
+      if(uniq.includes(str[i]) === false){
+        // If the character not present in uniq
+        // Concatenate the character with uniq
+        uniq += str[i]
+      }
+    }
+    return uniq;
+  }
+</script>
+</head>
+<body>
+
+<h2>Code Breaker</h2>
+
+<label for="interpreter">Interpreter</label>
+
+<textarea id="interpreter" name="interpreter" rows="4" cols="50">
+function interpret(p){
+    var a = 0, o = '';
+    for(const c of p){
+        switch(c){
+            case '+': a++; break;
+            case '-': a--; break;
+            case '=': o += a; break;
+            case '*': o += String.fromCharCode(a); break;
+            case '/': a = 0; break;
+            case '!': a += 10; break;
+            case '&': a -= 10; break;
+            case '#': o += '\n'; break;
+        }
+    }
+    console.log(o);
+    document.getelementById('output').value += o + '\n';
+}
+</textarea>
+
+<label for="inputs">Inputs</label>
+
+<textarea id="inputs" name="inputs" rows="4" cols="50">
+.>|>:|<<>..|...:.|+|.:<+>:>.|+.<:||:|>..|>:|.:||>+:|.<+:.:|<<.|:>
+..:>.||>>:<+|:>.|+>:>.|+..:|:|:><<|||+|.|>>::|+|+|>.|<<+:>.||>.|.>:||
+...|:<>::>|:<>:|.:||>+|.:<+>:>.|+<>|.:<.|>.+>:>|>:+:<<|:>.:.>::<+>:>.|+<<:|:>>...
+...||>:>+:|.<+>>|.|>..+|.:<+...||>:>+:<.|>..<
+>::>|:.|+<||>.|:.|+|.:<+.<:||:|>..+:||>>.||+|.|>+<:>.||>:|.:||>
+<:>.||>:|.:||>+|.:<+>:>.|+.|.:>>:>+:|.<+>:>.|+:<:||:>.
+>::>||>:<.<:|>>|>:|.:||>+|.:<+>:>.|+:.|>:>+>::|+:..|:>.<.|<>:|.:||>
+<<|.>.>.+||:||:+:<:|>.<|.|+>>||+<:|...|+:|+|>.<<|||:<+<<:||>...|:>+<<>|>:+<<|:<+<<:>|.>:>:.||>+>:>.||>+>.:|:<>:
+</textarea>
+
+<button>Decode</button>
+
+<label for="output">Output</label>
+
+<textarea id="output" name="output" rows="4" cols="50">
+</textarea>
+
+</body>
+</html>
