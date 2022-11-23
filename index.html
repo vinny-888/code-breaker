@@ -44,12 +44,13 @@
   function bruteForce(){
     let permutations = stringPermutations(chars);
     permutations.forEach((perm, index)=>{
-      let output = interpret2(code1, perm);
+      let brute_code = document.getElementById('brute_code').value;
+      let output = interpret2(brute_code, perm);
       console.log(output);
-      let isnum = /^\d+$/.test(output.replace(' ', '').replace('\n', ''));
-      if(isnum){
+      // let isnum = /^\d+$/.test(output.replace(' ', '').replace('\n', ''));
+      // if(isnum){
         document.getElementById('output2').value += '\nCode '+index+': '+ (perm) +'\n' + output + '\n';
-      }
+      // }
     })
   }
 
@@ -121,6 +122,8 @@ function interpret(p){
 
 <br>
 <button onclick="bruteForce();">Brute Force</button>
+<input type="text" id="brute_code" value="<<|.>.>.+||:||:+:<:|>.<|.|+>>||+<:|...|+:|+|>.<<|||:<+<<:||>...|:>+<<>|>:+<<|:<+<<:>|.>:>:.||>+>:>.||>+>.:|:<>:">
+<br>
 <label for="output2">Output</label>
 <br>
 <textarea id="output2" name="output2" rows="50" cols="200">
