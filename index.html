@@ -33,23 +33,20 @@
 
 <h2>Code Breaker</h2>
 
-<span>Based on <a href="https://esolangs.org/wiki/%2B-#+-=*/!&#">https://esolangs.org/wiki/%2B-#+-=*/!&#</a></span>
-<br><br>
+<br>
 <label for="interpreter">Interpreter</label>
 <br>
 <textarea id="interpreter" name="interpreter" rows="20" cols="120">
-function interpret(p){
+  function interpret(p){
     var a = 0, o = '';
     for(const c of p){
         switch(c){
             case '+': a++; break;
-            case '-': a--; break;
-            case '=': o += a; break;
-            case '*': o += String.fromCharCode(a); break;
-            case '/': a = 0; break;
-            case '!': a += 10; break;
-            case '&': a -= 10; break;
-            case '#': o += '\n'; break;
+            case '|': a--; break;
+            case ':': o += a; break;
+            case '.': o += String.fromCharCode(a); break;
+            case '>': a += 10; break;
+            case '<': a -= 10; break;
         }
     }
     return o;
@@ -70,9 +67,7 @@ function interpret(p){
 >::>||>:<.<:|>>|>:|.:||>+|.:<+>:>.|+:.|>:>+>::|+:..|:>.<.|<>:|.:||>
 <<|.>.>.+||:||:+:<:|>.<|.|+>>||+<:|...|+:|+|>.<<|||:<+<<:||>...|:>+<<>|>:+<<|:<+<<:>|.>:>:.||>+>:>.||>+>.:|:<>:
 </textarea>
-<br><br>
-<span>Example that works with default interpreter: !!!!!!!++*!!!-*!---**+++*/!!!++*!!!!!+++++*!!++++*+++*&++++*&++*/!!!+++*</span>
-<br><br>
+<br>
 <button onclick="runCode();">Decode</button>
 
 <hr>
