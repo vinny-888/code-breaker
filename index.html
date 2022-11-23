@@ -2,6 +2,8 @@
 <html>
 <head>
 <script>
+  let chars = '.|:<>+';
+  let code1 = '.>|>:|<<>..|...:.|+|.:<+>:>.|+.<:||:|>..|>:|.:||>+:|.<+:.:|<<.|:>';
   function runCode(){
     eval(document.getElementById('interpreter').value);
     let codes = document.getElementById('inputs').value.split('\n');
@@ -27,6 +29,41 @@
     }
     return uniq;
   }
+
+  function stringPermutations(str) {
+    if (str.length <= 2) return str.length === 2 ? [str, str[1] + str[0]] : [str];
+    return str
+      .split('')
+      .reduce(
+        (acc, letter, i) =>
+          acc.concat(stringPermutations(str.slice(0, i) + str.slice(i + 1)).map(val => letter + val)),
+        []
+      );
+  };
+
+  function bruteForce(){
+    let permutations = stringPermutations(chars);
+    permutations.forEach((perm, index)=>{
+      let output = interpret2(code1, perm);
+      console.log(output);
+      document.getElementById('output2').value += 'Code '+index+': '+ (perm.join(',')) +'\n' + output + '\n';
+    })
+  }
+
+  function interpret2(p, chars){
+    var a = 0, o = '';
+    for(const c of p){
+        switch(c){
+            case chars[0]: a++; break;
+            case chars[1]: a--; break;
+            case chars[2]: o += a; break;
+            case chars[3]: o += String.fromCharCode(a); break;
+            case chars[4]: a += 10; break;
+            case chars[5]: a -= 10; break;
+        }
+    }
+    return o;
+}
 </script>
 </head>
 <body>
@@ -75,6 +112,15 @@ function interpret(p){
 <label for="output">Output</label>
 <br>
 <textarea id="output" name="output" rows="10" cols="120">
+</textarea>
+
+<hr>
+
+<br>
+<button onclick="bruteForce();">Brute Force</button>
+<label for="output2">Output</label>
+<br>
+<textarea id="output2" name="output2" rows="50" cols="200">
 </textarea>
 
 </body>
