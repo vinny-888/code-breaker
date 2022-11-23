@@ -6,11 +6,11 @@
     eval(document.getElementById('interpreter').value);
     let codes = document.getElementById('inputs').value.split('\n');
     document.getElementById('output').value = '';
-    codes.forEach((code)=>{
+    codes.forEach((code, index)=>{
       findUnique(code);
       let output = interpret(code);
       console.log(output);
-      document.getElementById('output').value += output + '\n';
+      document.getElementById('output').value += 'Code: '+ (index+1) +'\n' + output + '\n';
     });
   }
   function findUnique(str){
