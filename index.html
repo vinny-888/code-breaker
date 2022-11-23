@@ -5,7 +5,7 @@
   function runCode(){
     eval(document.getElementById('interpreter').value);
     let codes = document.getElementById('interpreter').value.split('\n');
-    document.getelementById('output').value = '';
+    document.getElementById('output').value = '';
     codes.forEach((code)=>{
        findUnique(code);
        interpret(code);
