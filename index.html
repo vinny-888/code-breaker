@@ -46,7 +46,7 @@
     permutations.forEach((perm, index)=>{
       let output = interpret2(code1, perm);
       console.log(output);
-      document.getElementById('output2').value += 'Code '+index+': '+ (perm.join(',')) +'\n' + output + '\n';
+      document.getElementById('output2').value += 'Code '+index+': '+ (perm) +'\n' + output + '\n';
     })
   }
 
