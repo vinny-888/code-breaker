@@ -3,7 +3,7 @@
 <head>
 <script>
   function runCode(){
-    let interpret = eval(document.getElementById('interpreter').value);
+    eval(document.getElementById('interpreter').value);
     let codes = document.getElementById('interpreter').value.split('\n');
     document.getelementById('output').value = '';
     codes.forEach((code)=>{
