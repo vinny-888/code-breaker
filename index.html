@@ -3,7 +3,7 @@
 <head>
 <script>
   let chars = '.|:<>+';
-  let code1 = '.>|>:|<<>..|...:.|+|.:<+>:>.|+.<:||:|>..|>:|.:||>+:|.<+:.:|<<.|:>';
+  let code1 = '<<|.>.>.+||:||:+:<:|>.<|.|+>>||+<:|...|+:|+|>.<<|||:<+<<:||>...|:>+<<>|>:+<<|:<+<<:>|.>:>:.||>+>:>.||>+>.:|:<>:';
   function runCode(){
     eval(document.getElementById('interpreter').value);
     let codes = document.getElementById('inputs').value.split('\n');
@@ -46,7 +46,10 @@
     permutations.forEach((perm, index)=>{
       let output = interpret2(code1, perm);
       console.log(output);
-      document.getElementById('output2').value += '\nCode '+index+': '+ (perm) +'\n' + output + '\n';
+      let isnum = /^\d+$/.test(output.replace(' ', '').replace('\n', ''));
+      if(isnum){
+        document.getElementById('output2').value += '\nCode '+index+': '+ (perm) +'\n' + output + '\n';
+      }
     })
   }
 
