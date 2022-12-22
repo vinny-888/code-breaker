@@ -2,7 +2,7 @@ let codes = [
 '<.:|><><.|:>', // JOXXER known code
 '>..|<|.|>.+>.:|:<:<',
 ':>||>..:|>>+|>:|...|',
-'...|>.|||.|..+...|>>.|<:<:',
+'...|>.|||.|.. ...|>>.|<:<:',
 '>:|>>.|+:<<<.|.|>:+>:|>>.|',
 '.<|:>.>.+|.|><|.||>>::|>:||+.|::>|>',
 '.<|:<.>+||.||>+|.>>+.<|>>:||::<+|>:|<<',
@@ -21,19 +21,29 @@ let codes = [
 '>>||+>.|..<.|+>::>|:>.||+..|.:||>+<<>.||>+|.+.<|.:>:<>:+:>:|...|+>:>.|+:<:||::><.|+:<>::>.||>>+>::|+>:>.|+<:|:>.|'
 ];
 
+
+// Replace + with ++ so we can replace later
+for(let i=0;i<codes.length; i++){
+    codes[i] = codes[i].replaceAll('+', '++');
+}
+
 let known = ['<.',':|','><','.|',':>'];
 
 let uniquePairs = {};
 
-codes.forEach((code)=>{
-    code = code.replaceAll('+', '');
-    let chars = code.split('');
-    for(let i=0;i<code.length; i+=2){
-        if(code[i+1]){
-            if(!uniquePairs[code[i]+code[i+1]]){
-                uniquePairs[code[i]+code[i+1]] = 0;
+
+
+codes.forEach((code, i)=>{
+    console.log('code['+i+'] length:', code.length);
+    let newCode = code.replaceAll('+', '');
+    console.log('code['+i+']:', newCode);
+    let chars = newCode.split('');
+    for(let i=0;i<newCode.length; i+=2){
+        if(newCode[i+1]){
+            if(!uniquePairs[newCode[i]+newCode[i+1]]){
+                uniquePairs[newCode[i]+newCode[i+1]] = 0;
             }
-            uniquePairs[code[i]+code[i+1]]++;
+            uniquePairs[newCode[i]+newCode[i+1]]++;
         }
     }
 })
@@ -71,6 +81,7 @@ newMappings[known[1]] = 'O';
 newMappings[known[2]] = 'X';
 newMappings[known[3]] = 'E';
 newMappings[known[4]] = 'R';
+newMappings['++'] = ' ';
 
 console.log('newMappings', newMappings);
 console.log('newMappings count:', Object.keys(newMappings).length);
@@ -94,3 +105,5 @@ codes.forEach((code)=>{
     output.push(newCode);
 })
 console.log(output);
+
+
