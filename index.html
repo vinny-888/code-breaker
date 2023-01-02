@@ -1,113 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-  let chars = '.|:<>+';
-  let code1 = '<<|.>.>.+||:||:+:<:|>.<|.|+>>||+<:|...|+:|+|>.<<|||:<+<<:||>...|:>+<<>|>:+<<|:<+<<:>|.>:>:.||>+>:>.||>+>.:|:<>:';
-  function runCode(){
-    eval(document.getElementById('interpreter').value);
-    let codes = document.getElementById('inputs').value.split('\n');
-    document.getElementById('output').value = '';
-    codes.forEach((code, index)=>{
-      findUnique(code);
-      let output = interpret(code);
-      console.log(output);
-      document.getElementById('output').value += 'Code: '+ (index+1) +'\n' + output + '\n';
-    });
+<script src="main.js"></script>
+<style>
+  input[type="text"]{
+    width: 10px;
+    background-color: #0F0;
   }
-  function findUnique(str){
-    // The variable that contains the unique values
-    let uniq = "";
-
-    for(let i = 0; i < str.length; i++){
-      // Checking if the uniq contains the character
-      if(uniq.includes(str[i]) === false){
-        // If the character not present in uniq
-        // Concatenate the character with uniq
-        uniq += str[i]
-      }
-    }
-    return uniq;
-  }
-
-  function stringPermutations(str) {
-    if (str.length <= 2) return str.length === 2 ? [str, str[1] + str[0]] : [str];
-    return str
-      .split('')
-      .reduce(
-        (acc, letter, i) =>
-          acc.concat(stringPermutations(str.slice(0, i) + str.slice(i + 1)).map(val => letter + val)),
-        []
-      );
-  };
-
-  function bruteForce(){
-    let permutations = stringPermutations(chars);
-    permutations.forEach((perm, index)=>{
-      let brute_code = document.getElementById('brute_code').value;
-      let output = interpret2(brute_code, perm);
-      console.log(output);
-      // let isnum = /^\d+$/.test(output.replace(' ', '').replace('\n', ''));
-      // if(isnum){
-        document.getElementById('output2').value += '\nCode '+index+': '+ (perm) +'\n' + output + '\n';
-      // }
-    })
-  }
-
-  function interpret2(p, chars){
-    var a = 0, o = '';
-    for(const c of p){
-        switch(c){
-            case chars[0]: a++; break;
-            case chars[1]: a--; break;
-            case chars[2]: o += a; break;
-            case chars[3]: o += String.fromCharCode(a); break;
-            case chars[4]: a += 10; break;
-            case chars[5]: a -= 10; break;
-        }
-    }
-    return o;
-}
-</script>
+</style>
 </head>
 <body>
 
-<h2>Code Breaker</h2>
+<h2>JOXXER Code Breaker</h2>
 
-<br>
-<label for="interpreter">Interpreter</label>
-<br>
-<textarea id="interpreter" name="interpreter" rows="20" cols="120">
-function interpret(p){
-    var a = 0, o = '';
-    for(const c of p){
-        switch(c){
-            case '+': a++; break;
-            case '|': a--; break;
-            case ':': o += a; break;
-            case '.': o += String.fromCharCode(a); break;
-            case '>': a += 10; break;
-            case '<': a -= 10; break;
-        }
-    }
-    return o;
-}
-</textarea>
-
-<br>
 
 <label for="inputs">Inputs</label>
 <br>
-<textarea id="inputs" name="inputs" rows="9" cols="120">.>|>:|<<>..|...:.|+|.:<+>:>.|+.<:||:|>..|>:|.:||>+:|.<+:.:|<<.|:>
-..:>.||>>:<+|:>.|+>:>.|+..:|:|:><<|||+|.|>>::|+|+|>.|<<+:>.||>.|.>:||
-...|:<>::>|:<>:|.:||>+|.:<+>:>.|+<>|.:<.|>.+>:>|>:+:<<|:>.:.>::<+>:>.|+<<:|:>>...
+
+<textarea id="inputs" name="inputs" rows="9" cols="120">>..|<|.|>.+>.:|:<:<
+:>||>..:|>>+|>:|...|
+...|>.|||.|..+...|>>.|<:<:
+>:|>>.|+:<<<.|.|>:+>:|>>.|
+.<|:>.>.+|.|><|.||>>::|>:||+.|::>|>
+.<|:<.>+||.||>+|.>>+.<|>>:||::<+|>:|<<
+:<:.:||>>:||>|.:||::<+<:|>>.|::<>:|.:||>
 ...||>:>+:|.<+>>|.|>..+|.:<+...||>:>+:<.|>..<
->::>|:.|+<||>.|:.|+|.:<+.<:||:|>..+:||>>.||+|.|>+<:>.||>:|.:||>
+>.|.>>|.>::<+|:>.|+>>|...|+>::|+..|+.:>:|.>.||>
 <:>.||>:|.:||>+|.:<+>:>.|+.|.:>>:>+:|.<+>:>.|+:<:||:>.
+>::>|:.|+<||>.|:.|+|.:<+.<:||:|>..+:||>>.||+|.|>+<:>.||>:|.:||>
+.>|>:|<<>..|...:.|+|.:<+>:>.|+.<:||:|>..|>:|.:||>+:|.<+:.:|<<.|:>
 >::>||>:<.<:|>>|>:|.:||>+|.:<+>:>.|+:.|>:>+>::|+:..|:>.<.|<>:|.:||>
-<<|.>.>.+||:||:+:<:|>.<|.|+>>||+<:|...|+:|+|>.<<|||:<+<<:||>...|:>+<<>|>:+<<|:<+<<:>|.>:>:.||>+>:>.||>+>.:|:<>:</textarea>
+..:>.||>>:<+|:>.|+>:>.|+..:|:|:><<|||+|.|>>::|+|+|>.|<<+:>.||>.|.>:||
+>:>.|+:||::>:|.:|:>:|:<+|.:<+>:>.|+:<>:||>..|+>::|+..||>:+>:>|.:<+|:>>>>:|
+...|:<>::>|:<>:|.:||>+|.:<+>:>.|+<>|.:<.|>.+>:>|>:+:<<|:>.:.>::<+>:>.|+<<:|:>>...
+>:>:|:<.|+:.:|>.|.>:|.<|.||>:<+>|<|.|+|>:|+|....||+<<>|>:+>:.|||+|:>.|+:>.||>.>.||+:<|.>:>:|.|>.:+:||>
+<<|.>.>.+||:||:+:<:|>.<|.|+>>||+<:|...|+:|+|>.<<|||:<+<<:||>...|:>+<<>|>:+<<|:<+<<:>|.>:>:.||>+>:>.||>+>.:|:<>:
+>>||+>.|..<.|+>::>|:>.||+..|.:||>+<<>.||>+|.+.<|.:>:<>:+:>:|...|+>:>.|+:<:||::><.|+:<>::>.||>>+>::|+>:>.|+<:|:>.|
+</textarea>
+<!-- <textarea id="inputs" name="inputs" rows="9" cols="120">:>||>..:|>>+|>:|...|</textarea> -->
 <br>
-<button onclick="runCode();">Decode</button>
+<button onclick="decode();">Decode</button>
 
 <hr>
 
@@ -118,16 +50,9 @@ function interpret(p){
 <textarea id="output" name="output" rows="10" cols="120">
 </textarea>
 
-<hr>
+<div id="chooser">
 
-<br>
-<button onclick="bruteForce();">Brute Force</button>
-<input type="text" id="brute_code" value="<<|.>.>.+||:||:+:<:|>.<|.|+>>||+<:|...|+:|+|>.<<|||:<+<<:||>...|:>+<<>|>:+<<|:<+<<:>|.>:>:.||>+>:>.||>+>.:|:<>:">
-<br>
-<label for="output2">Output</label>
-<br>
-<textarea id="output2" name="output2" rows="50" cols="200">
-</textarea>
+</div>
 
 </body>
 </html>
